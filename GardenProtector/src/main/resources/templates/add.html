@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="margin-top:180px;" align="center">
+    <form action="/article/addArticle" method="post">
+        <table border="1">
+            <tr>
+                <td> 用户id </td>
+                <td>
+                    <input type="text" name="user_id"/>
+                </td>
+            </tr>
+            <tr>
+                <td> 作者 </td>
+                <td>
+                    <input type="text" name="author"/>
+                </td>
+            </tr>
+            <tr>
+                <td> 标题 </td>
+                <td>
+                    <input type="text" name="title"/>
+                </td>
+            </tr>
+            <tr>
+                <td> 内容 </td>
+                <td>
+                    <input type="text" name="content"/>
+                </td>
+            </tr>
+            <tr>
+                <td> 发表时间 </td>
+                <td>
+                    <input type="text" name="createtime"/>
+                </td>
+            </tr>
+            <tr>
+                <td> 是否喜欢 </td>
+                <td>
+                    <input type="text" name="liked"/>
+                </td>
+            </tr>
+            <tr>
+                <th align="right">
+                    <input type="submit" name="submit" value="添加"/>
+                </th>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

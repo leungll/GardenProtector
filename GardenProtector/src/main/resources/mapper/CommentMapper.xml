@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.gardenprotector.mapper.comment.CommentMapper">
+
+    <resultMap id="comment" type="com.nenusoftware.gardenprotector.entity.comment.Comment">
+        <id property="id" column="id"/>
+        <result property="article_id" column="article_id"/>
+        <result property="answer_id" column="answer_id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="author" column="author"/>
+        <result property="content" column="content"/>
+        <result property="liked" column="liked"/>
+        <result property="createtime" column="createtime"/>
+
+    </resultMap>
+
+    <insert id="addComment">
+        INSERT INTO `t_comment`
+        (article_id,  user_id, author, content, liked, createtime)
+        VALUES (#{comment.article_id},#{comment.user_id}, #{comment.author}, #{comment.content}, #{comment.liked},#{comment.createtime})
+    </insert>
+
+    <select id="listComment" resultMap="comment">
+          SELECT *
+          FROM `t_comment`
+          WHERE article_id = #{article_id}
+    </select>
+
+    <update id="updateComment">
+        update t_comment
+        SET  content = #{comment.content}
+        WHERE id = #{comment.id}
+    </update>
+
+    <delete id="delArticle">
+        DELETE FROM t_article
+        WHERE id = #{id}
+    </delete>
+
+
+</mapper>

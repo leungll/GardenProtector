@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="margin-top:180px;" align="center">
+    <table border="1" th:each="article : ${articleList}">
+        <td th:text="${article.id}"></td>
+        <td th:text="${article.user_id}"></td>
+        <td th:text="${article.author}"></td>
+        <td th:text="${article.title}"></td>
+        <td th:text="${article.content}"></td>
+        <td th:text="${article.createtime}"></td>
+        <td th:text="${article.liked}"></td>
+        <a th:href = "@{article/delArticle/${article.id}}"><button type="submit"  value="修改">删除</button></a>
+    </table>
+</div>
+</body>
+</html>
