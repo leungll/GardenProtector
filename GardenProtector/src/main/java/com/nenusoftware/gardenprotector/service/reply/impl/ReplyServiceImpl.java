@@ -45,4 +45,11 @@ public class ReplyServiceImpl implements ReplyService {
     public boolean giveLike(int id, int replycomment_id) throws Exception{
         return replyMapper.giveLike(id, replycomment_id);
     }
+
+    @Override
+    public List<Reply> getReplyLike(int id) throws Exception{
+        List<Reply> list = Collections.emptyList();
+        list = replyMapper.getReplyLike(id);
+        return list;
+    }
 }

@@ -24,4 +24,6 @@ public interface CommentMapper {
     public List<Comment> listComment(@Param("article_id") int article_id) throws Exception;
 
     public boolean giveLike(@Param("id") int id, @Param("liked") int liked) throws Exception;
+
+    public List<Comment> getCommentLike (@Param("id") int id) throws Exception;
 }

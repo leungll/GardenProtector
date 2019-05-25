@@ -24,4 +24,6 @@ public interface ReplyMapper {
     public boolean giveLike(@Param("id") int id, @Param("replycomment_id") int replycomment_id) throws Exception;
 
     public List<Reply> listReply(@Param("replycomment_id") int replycomment_id) throws Exception;
+
+    public List<Reply> getReplyLike (@Param("id") int id) throws Exception;
 }

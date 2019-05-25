@@ -45,4 +45,11 @@ public class CommentServiceImpl implements CommentService {
     public boolean giveLike(int id, int like) throws Exception{
         return commentMapper.giveLike(id, like);
     }
+
+    @Override
+    public List<Comment> getCommentLike(int id) throws Exception{
+        List<Comment> list = Collections.emptyList();
+        list = commentMapper.getCommentLike(id);
+        return list;
+    }
 }

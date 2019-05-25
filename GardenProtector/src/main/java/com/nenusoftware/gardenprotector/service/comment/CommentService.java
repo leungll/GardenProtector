@@ -19,4 +19,6 @@ public interface CommentService {
     public boolean delComment(int id) throws Exception;
 
     public boolean giveLike(int id, int liked) throws Exception;
+
+    public List<Comment> getCommentLike (int id) throws Exception;
 }

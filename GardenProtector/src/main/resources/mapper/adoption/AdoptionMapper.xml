@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.gardenprotector.mapper.adoption.AdoptionMapper">
+
+    <resultMap id="adoption" type="com.nenusoftware.gardenprotector.entity.adoption.Adoption">
+        <id property="id" column="id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="city" column="city"/>
+        <result property="types" column="types"/>
+        <result property="detail" column="detail"/>
+        <result property="note" column="note"/>
+    </resultMap>
+
+    <insert id="addAdoption">
+        INSERT INTO `t_adoption`
+        (user_id, city, types, detail, note)
+        VALUES (#{adoption.user_id}, #{adoption.city}, #{adoption.types}, #{adoption.detail}, #{adoption.note})
+    </insert>
+
+    <select id="listAdoption" resultMap="adoption">
+          SELECT *
+          FROM `t_adoption`
+    </select>
+
+    <update id="updateAdoption">
+        update t_adoption
+        SET city = #{adoption.city}, types = #{adoption.types}, detail = #{adoption.detail}, note = #{adoption.note}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delAdoption">
+        DELETE FROM t_adoption
+        WHERE id = #{id}
+    </delete>
+
+
+</mapper>

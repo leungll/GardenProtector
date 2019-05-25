@@ -20,6 +20,8 @@ public class Article {
 
     private Integer liked;
 
+    private String types;
+
     public Integer getId() {
         return id;
     }
@@ -76,6 +78,14 @@ public class Article {
         this.liked = like;
     }
 
+    public String getTypes() {
+        return types;
+    }
+
+    public void setTypes(String types) {
+        this.types = types;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -84,8 +94,9 @@ public class Article {
                 ", author='" + author + '\'' +
                 ", user_id=" + user_id +
                 ", content='" + content + '\'' +
-                ", createtime=" + createtime +
-                ", like=" + liked +
+                ", createtime='" + createtime + '\'' +
+                ", liked=" + liked +
+                ", types=" + types +
                 '}';
     }
 }

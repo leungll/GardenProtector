@@ -37,4 +37,9 @@
         WHERE  id = #{id}
     </delete>
 
+    <select id="getReplyLike" resultMap="reply">
+        SELECT `liked`
+        FROM `t_reply`
+        WHERE id = #{id}
+    </select>
 </mapper>

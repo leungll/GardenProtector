@@ -1,17 +1,26 @@
 spring:
   profiles:
-    active: prod
+    active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/db_gardenprotector
+    url: jdbc:mysql://127.0.0.1/db_gardenprotector?autoReconnect=true&useSSL=false&characterEncoding=utf-8
     username: root
     password: mysql
-    server:
-      port:8080
-    servlet:
-      path"/springboot
+server:
+  port: 8082
+
 mybatis:
+  configuration:
+    cache-enabled: true
   #实体类所做包
   type-aliases-package: com.nenusoftware.gardenprotector.entity
   #mapper.xml所在位置
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*/*.xml
+
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://47.103.10.220/db_gardenprotector?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: Join666

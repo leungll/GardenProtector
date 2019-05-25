@@ -10,8 +10,6 @@ public class Comment {
 
     private Integer article_id;
 
-    private Integer answer_id;
-
     private Integer user_id;
 
     private String author;
@@ -36,14 +34,6 @@ public class Comment {
 
     public void setArticle_id(Integer article_id) {
         this.article_id = article_id;
-    }
-
-    public Integer getAnswer_id() {
-        return answer_id;
-    }
-
-    public void setAnswer_id(Integer answer_id) {
-        this.answer_id = answer_id;
     }
 
     public Integer getUser_id() {
@@ -91,10 +81,9 @@ public class Comment {
         return "Comment{" +
                 "id=" + id +
                 ", article_id=" + article_id +
-                ", answer_id=" + answer_id +
                 ", user_id=" + user_id +
                 ", author='" + author + '\'' +
-                ", content='" + content + '\'' +
+                ", commentContent='" + content + '\'' +
                 ", liked=" + liked +
                 ", createtime='" + createtime + '\'' +
                 '}';

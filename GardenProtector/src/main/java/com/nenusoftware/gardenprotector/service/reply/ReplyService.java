@@ -20,4 +20,6 @@ public interface ReplyService {
     public List<Reply> listReply(int replycomment_id) throws Exception;
 
     public boolean giveLike(int id, int replycomment_id) throws Exception;
+
+    public List<Reply> getReplyLike(int id) throws Exception;
 }

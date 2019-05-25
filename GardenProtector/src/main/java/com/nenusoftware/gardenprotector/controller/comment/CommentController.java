@@ -2,13 +2,14 @@ package com.nenusoftware.gardenprotector.controller.comment;
 
 import com.nenusoftware.gardenprotector.entity.comment.Comment;
 import com.nenusoftware.gardenprotector.service.comment.CommentService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,25 +17,24 @@ import java.util.List;
  * @Description:
  * @Date: 13:37 2019/5/15
  */
-@Controller
+@CrossOrigin
+@RestController
 @RequestMapping("/comment")
 public class CommentController {
 
     @Resource
     CommentService commentService;
 
-    @RequestMapping("listAllArticle")
-//    public List<Article> listAllArticle(Model model){
-    public String listAllArticle(Model model,int id){
-        List<Comment> list = null;
+    @RequestMapping("listAllComment")
+    public List<Comment> listAllComment(String articleIdStr){
+        int articleId = Integer.parseInt(articleIdStr);
+        List<Comment> commentList = null;
         try {
-            list = commentService.listComment(id);
-            model.addAttribute("articleList",list);
+            commentList = commentService.listComment(articleId);
         }catch (Exception e){
             e.printStackTrace();
         }
-//        return list;
-        return "home";
+        return commentList;
     }
 
     @RequestMapping("toAdd")
@@ -44,21 +44,56 @@ public class CommentController {
 
     @RequestMapping("addComment")
     @ResponseBody
-    public String addComment(Comment comment) throws Exception {
+    public void addComment(String articleIdStr, String userIdStr, String authorStr, String contentStr) throws Exception {
+        Comment comment = new Comment();
+        int articleId = Integer.parseInt(articleIdStr);
+        int userId = Integer.parseInt(userIdStr);
+        comment.setArticle_id(articleId);
+        comment.setUser_id(userId);
+        comment.setAuthor(authorStr);
+        comment.setContent(contentStr);
+        comment.setLiked(0);
+        Date date = new Date();
+        String createTime = String.valueOf(date);
+        comment.setCreatetime(createTime);
         commentService.addComment(comment);
-        return "添加成功";
+        System.out.println("添加评论成功！");
     }
 
-    @RequestMapping("delComment/{id}")
-    public String delComment(@PathVariable("id") int id) throws Exception {
-        commentService.delComment(id);
-        return "删除成功";
+    @RequestMapping("delComment")
+    public void delComment(String commentIdStr) throws Exception {
+        int commentId = Integer.parseInt(commentIdStr);
+        commentService.delComment(commentId);
+        System.out.println("删除评论成功！");
     }
 
     @RequestMapping("updateComment")
-    public String updateComment(Comment comment, int id) throws Exception {
-        comment.setId(id);
+    public void updateComment(String commentIdStr, String articleIdStr, String userIdStr, String authorStr, String contentStr, String likedStr) throws Exception {
+        int commentId = Integer.parseInt(commentIdStr);
+        int articleId = Integer.parseInt(articleIdStr);
+        int userId = Integer.parseInt(userIdStr);
+        int liked = Integer.parseInt(likedStr);
+        Date date = new Date();
+        String createTime = String.valueOf(date);
+        Comment comment = new Comment();
+        comment.setId(commentId);
+        comment.setArticle_id(articleId);
+        comment.setUser_id(userId);
+        comment.setAuthor(authorStr);
+        comment.setContent(contentStr);
+        comment.setLiked(liked);
+        comment.setCreatetime(createTime);
         commentService.updateComment(comment);
-        return "修改成功";
+        System.out.println("修改评论成功！");
+    }
+
+    @RequestMapping("getCommentLike")
+    public List giveCommentLike(String commentIdStr, String commentLikedStr) throws Exception {
+        int commentId = Integer.parseInt(commentIdStr);
+        int commentLiked = Integer.parseInt(commentLikedStr);
+        commentService.giveLike(commentId,commentLiked);
+        List commentList = new ArrayList();
+        commentList = commentService.getCommentLike(commentId);
+        return commentList;
     }
 }

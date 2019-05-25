@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenusoftware.gardenprotector.mapper.user.UserMapper">
+
+    <resultMap id="user" type="com.nenusoftware.gardenprotector.entity.user.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="image" column="image"/>
+        <result property="sex" column="sex"/>
+        <result property="birth" column="birth"/>
+        <result property="locate" column="locate"/>
+        <result property="job" column="job"/>
+        <result property="introduction" column="introduction"/>
+        <result property="user_id" column="user_id"/>
+        <result property="author" column="author"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createtime" column="createtime"/>
+        <result property="liked" column="liked"/>
+        <result property="power" column="power"/>
+    </resultMap>
+
+    <insert id="addUser">
+        INSERT INTO `t_user`
+        (username, password, image, sex, birth, locate, job, introduction, power)
+        VALUES (#{user.username}, #{user.password}, #{user.image}, #{user.sex}, #{user.birth}, #{user.locate}, #{user.job}, #{user.introduction}, #{user.power})
+    </insert>
+
+    <select id="listUserArticle" resultMap="user">
+          SELECT *
+          FROM `t_article`
+          WHERE user_id = #{id}
+    </select>
+
+    <select id="listUser" resultMap="user">
+          SELECT *
+          FROM `t_user`
+          WHERE id = #{id}
+    </select>
+
+    <update id="updateUser">
+        update t_user
+        SET username = #{user.username},  image = #{user.image}, sex = #{user.sex}, birth = #{user.birth}, locate = #{user.locate}, job = #{user.job}, introduction = #{user.introduction}
+        WHERE id = #{user.id}
+    </update>
+
+    <select id="pwIsTrue" resultMap="user">
+          SELECT *
+          FROM `t_user`
+          WHERE username = #{username} AND password = #{password}
+    </select>
+
+    <select id="selectByName" resultMap="user">
+        SELECT `username`
+        FROM t_user
+        WHERE username = #{username}
+    </select>
+
+    <delete id="deleteUser">
+        DELETE FROM t_user
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updatePower">
+        update t_user
+        set power = 1
+        where id = #{id}
+    </update>
+
+</mapper>

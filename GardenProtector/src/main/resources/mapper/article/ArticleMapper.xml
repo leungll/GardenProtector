@@ -12,12 +12,13 @@
         <result property="content" column="content"/>
         <result property="createtime" column="createtime"/>
         <result property="liked" column="liked"/>
+        <result property="types" column="types"/>
     </resultMap>
 
     <insert id="addArticle">
         INSERT INTO `t_article`
-        (user_id, author, title, content, createtime, liked)
-        VALUES (#{article.user_id}, #{article.author}, #{article.title}, #{article.content}, #{article.createtime}, #{article.liked})
+        (user_id, author, title, content, createtime, liked, types)
+        VALUES (#{article.user_id}, #{article.author}, #{article.title}, #{article.content}, #{article.createtime}, #{article.liked}, #{article.types})
     </insert>
 
     <select id="listAllArticle" resultMap="article">
@@ -27,7 +28,7 @@
 
     <update id="updateArticle">
         update t_article
-        SET title = #{article.title}, content = #{article.content}
+        SET title = #{article.title}, content = #{article.content}, types=#{article.types}
         WHERE id = #{article.id}
     </update>
 
@@ -38,9 +39,25 @@
 
     <update id="giveLike">
         update t_article
-        SET liked = #{liked}
+        SET liked = #{liked} + 1
         WHERE id = #{id}
     </update>
 
+    <select id="getArticle" resultMap="article">
+        SELECT *
+        FROM t_article
+        WHERE id = #{id}
+    </select>
 
+    <select id="selectArticleByTypes" resultMap="article">
+        SELECT *
+        FROM t_article
+        WHERE types = #{types}
+    </select>
+
+    <select id="selectArticle" resultMap="article">
+        SELECT *
+        FROM  t_article
+        WHERE title LIKE #{keyword}
+    </select>
 </mapper>

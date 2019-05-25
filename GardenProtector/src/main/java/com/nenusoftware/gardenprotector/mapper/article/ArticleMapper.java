@@ -23,4 +23,11 @@ public interface ArticleMapper {
     public boolean delArticle(@Param("id") int id) throws Exception;
 
     public boolean giveLike(@Param("id") int id, @Param("liked") int liked) throws Exception;
- }
+
+    public List<Article> getArticle(@Param("id") int id) throws Exception;
+
+    public List<Article> selectArticleByTypes(@Param("types") String types) throws Exception;
+
+    public List<Article> selectArticle(@Param("keyword") String keyword) throws Exception;
+
+}

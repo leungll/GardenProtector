@@ -42,7 +42,13 @@ public class ReplyServiceTest {
 
     @Test
     public void testDelReply() throws Exception{
-        int id = 1;
+        int id = 4;
         replyService.delReply(id);
+    }
+
+    @Test
+    public void testGetReplyLike() throws Exception{
+        int id = 3;
+        System.out.println(replyService.getReplyLike(id));
     }
 }

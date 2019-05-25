@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author : kongyy
@@ -37,7 +39,7 @@ public class CommentServiceTest {
 
     @Test
     public void testlistComment() throws Exception{
-        int article_id = 1;
+        int article_id = 5;
         System.out.println(commentService.listComment(article_id));
     }
 
@@ -50,5 +52,19 @@ public class CommentServiceTest {
 //        commentService.updateComment(comment);
 //    }
 
+    @Test
+    public void testGetLike() throws Exception{
+        int id = 1;
+        System.out.println(commentService.getCommentLike(id));
+    }
 
+    @Test
+    public void testGiveCommentLike() throws Exception{
+        int commentId = 1;
+        int commentLiked = 20;
+        System.out.println(commentService.giveLike(commentId,commentLiked));
+        List commentList = new ArrayList();
+        commentList = commentService.getCommentLike(commentId);
+        System.out.println(commentList);
+    }
 }

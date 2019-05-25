@@ -13,7 +13,6 @@
         <result property="content" column="content"/>
         <result property="liked" column="liked"/>
         <result property="createtime" column="createtime"/>
-
     </resultMap>
 
     <insert id="addComment">
@@ -34,10 +33,20 @@
         WHERE id = #{comment.id}
     </update>
 
-    <delete id="delArticle">
-        DELETE FROM t_article
+    <delete id="delComment">
+        DELETE FROM t_comment
         WHERE id = #{id}
     </delete>
 
+    <update id="giveLike">
+        update t_comment
+        SET liked = #{liked} + 1
+        WHERE id = #{id}
+    </update>
 
+    <select id="getCommentLike" resultMap="comment">
+        SELECT `liked`
+        FROM `t_comment`
+        WHERE id = #{id}
+    </select>
 </mapper>

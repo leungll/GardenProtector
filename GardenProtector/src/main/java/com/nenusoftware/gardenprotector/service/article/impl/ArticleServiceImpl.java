@@ -42,7 +42,29 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public boolean giveLiked(int id, int liked) throws Exception{
+    public boolean giveLike(int id, int liked) throws Exception{
         return articleMapper.giveLike(id, liked);
+    }
+
+    @Override
+    public List<Article> getArticle(int id) throws Exception{
+        List<Article> listArticle = Collections.emptyList();
+        listArticle = articleMapper.getArticle(id);
+        return listArticle;
+    }
+
+    @Override
+    public List<Article> selectArticleByTypes(String types) throws Exception{
+        List<Article> list = Collections.emptyList();
+        list = articleMapper.selectArticleByTypes(types);
+        return list;
+    }
+
+    @Override
+    public List<Article> selectArticle(String keywordstr) throws Exception{
+        List<Article> list = Collections.emptyList();
+        String keyword = "%"+keywordstr+"%";
+        list = articleMapper.selectArticle(keyword);
+        return list;
     }
 }

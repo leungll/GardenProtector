@@ -19,5 +19,13 @@ public interface ArticleService {
 
     public boolean delArticle(int id) throws Exception;
 
-    public boolean giveLiked(int id, int liked) throws Exception;
+    public boolean giveLike(int id, int liked) throws Exception;
+
+    public List<Article> getArticle(int id) throws Exception;
+
+    public List<Article> selectArticleByTypes(String types) throws Exception;
+
+    public List<Article> selectArticle(String keyword) throws Exception;
+
+
 }
