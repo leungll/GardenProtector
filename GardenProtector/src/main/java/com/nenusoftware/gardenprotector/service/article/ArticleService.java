@@ -27,5 +27,4 @@ public interface ArticleService {
 
     public List<Article> selectArticle(String keyword) throws Exception;
 
-
 }

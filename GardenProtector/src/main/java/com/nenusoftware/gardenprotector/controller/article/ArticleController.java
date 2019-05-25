@@ -3,8 +3,6 @@ package com.nenusoftware.gardenprotector.controller.article;
 import com.nenusoftware.gardenprotector.entity.article.Article;
 import com.nenusoftware.gardenprotector.service.article.ArticleService;
 import com.nenusoftware.gardenprotector.service.comment.CommentService;
-//import io.swagger.annotations.Api;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +52,7 @@ public class ArticleController {
 
     @RequestMapping("addArticle")
     @ResponseBody
-    public void addArticle(String userIdStr, String authorStr, String titleStr, String contentStr) throws Exception {
+    public void addArticle(String userIdStr, String authorStr, String titleStr, String contentStr, String typesStr) throws Exception {
         Article article = new Article();
         int userId = Integer.parseInt(userIdStr);
         Date date = new Date();
@@ -63,6 +61,7 @@ public class ArticleController {
         article.setAuthor(authorStr);
         article.setTitle(titleStr);
         article.setContent(contentStr);
+        article.setTypes(typesStr);
         article.setCreatetime(createTime);
         article.setLiked(0);
         articleService.addArticle(article);
@@ -77,7 +76,7 @@ public class ArticleController {
     }
 
     @RequestMapping("updateArticle")
-    public void updateArticle(String userIdStr, String authorStr, String titleStr, String contentStr, String likedStr, String articleIdStr) throws Exception {
+    public void updateArticle(String userIdStr, String authorStr, String titleStr, String contentStr, String likedStr, String articleIdStr, String typesStr) throws Exception {
         Article article = new Article();
         int articleId = Integer.parseInt(articleIdStr);
         int userId = Integer.parseInt(userIdStr);
@@ -87,6 +86,7 @@ public class ArticleController {
         article.setAuthor(authorStr);
         article.setTitle(titleStr);
         article.setContent(contentStr);
+        article.setTypes(typesStr);
         Date date = new Date();
         String createTime = String.valueOf(date);
         article.setCreatetime(createTime);
@@ -109,10 +109,17 @@ public class ArticleController {
     @RequestMapping("getArticleLike")
     public List giveArticleLike(String articleIdStr, String articleLikedStr) throws Exception {
         int articleId = Integer.parseInt(articleIdStr);
-        int articleLiked = Integer.parseInt(articleIdStr);
+        int articleLiked = Integer.parseInt(articleLikedStr);
         articleService.giveLike(articleId,articleLiked);
         List articleList = new ArrayList();
         articleList = articleService.getArticle(articleId);
+        return articleList;
+    }
+
+    @RequestMapping("queryArticleTitle")
+    public List queryArticleTitle(String keyStr) throws Exception {
+        List<Article> articleList = new ArrayList<>();
+        articleList = articleService.selectArticle(keyStr);
         return articleList;
     }
 }

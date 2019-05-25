@@ -23,10 +23,10 @@ public class AdoptionController {
     AdoptionService adoptionService;
 
     @RequestMapping(value = "addAdoption")
-    public void addAdoption(String user_idstr, String city, String types, String detail, String note) throws Exception{
+    public void addAdoption(String user_idStr, String city, String types, String detail, String note) throws Exception{
         Adoption adoption = new Adoption();
         adoption.setCity(city);
-        Integer user_id = Integer.parseInt(user_idstr);
+        Integer user_id = Integer.parseInt(user_idStr);
         adoption.setUser_id(user_id);
         adoption.setTypes(types);
         adoption.setDetail(detail);
@@ -35,7 +35,8 @@ public class AdoptionController {
     }
 
     @RequestMapping(value = "delAdoption")
-    public void deleteAdoption(int id) throws Exception{
+    public void deleteAdoption(String idStr) throws Exception{
+        int id = Integer.parseInt(idStr);
         adoptionService.delAdoption(id);
     }
 
@@ -51,11 +52,10 @@ public class AdoptionController {
     }
 
     @RequestMapping(value = "listAdoption")
-    public List<Adoption> listAdoption(String user_idstr) throws Exception{
-        Integer user_id = Integer.parseInt(user_idstr);
+    public List<Adoption> listAdoption(String userIdStr) throws Exception{
+        Integer user_id = Integer.parseInt(userIdStr);
         List<Adoption> adoptionList = Collections.emptyList();
         adoptionList = adoptionService.listAdoption(user_id);
         return  adoptionList;
     }
-
 }

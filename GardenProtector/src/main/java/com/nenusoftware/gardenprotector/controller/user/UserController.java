@@ -42,26 +42,46 @@ public class UserController {
 
     @RequestMapping("/register")
     public String register (String username, String password) throws Exception{
-        if(userService.selectByName(username)){
+        if(!userService.selectByName(username)){
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
+            user.setPower(0);
             if(userService.addUser(user)){
                 System.out.println("注册成功！");
             }
         }else{
-            System.out.println("用户名不存在，请去注册！");
+            System.out.println("用户名已存在，请直接登录！");
         }
         return username;
     }
 
-    @RequestMapping("/listUser")
-    public List<User> listUser(HttpServletRequest request) throws Exception {
+    @RequestMapping("/listUserById")
+    public List<User> listUserById(HttpServletRequest request) throws Exception {
         List<User> userList = null;
         HttpSession session = request.getSession();
         String username = String.valueOf(session.getAttribute("usernameSession"));
         int userId = userService.getIdByUsername(username).getId();
         userList = userService.listUser(userId);
         return userList;
+    }
+
+    @RequestMapping("/listUserArticle")
+    public List<User> listUserArticle(HttpServletRequest request) throws Exception {
+        List<User> articleList = null;
+        HttpSession session = request.getSession();
+        String username = String.valueOf(session.getAttribute("usernameSession"));
+        int userId = userService.getIdByUsername(username).getId();
+        articleList = userService.listUserArticle(userId);
+        return articleList;
+    }
+
+    @RequestMapping("/deleteUser")
+    public void deleteUser(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        String username = String.valueOf(session.getAttribute("usernameSession"));
+        int userId = userService.getIdByUsername(username).getId();
+        userService.deleteUser(userId);
+        System.out.println("注销成功");
     }
 }

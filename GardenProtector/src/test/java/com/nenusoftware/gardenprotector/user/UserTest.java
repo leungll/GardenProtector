@@ -20,6 +20,11 @@ public class UserTest {
     UserService userService;
 
     @Test
+    public void testListAllUser() throws Exception{
+        System.out.println(userService.listAllUser());
+    }
+
+    @Test
     public void testAddUser() throws Exception{
         User user = new User();
         user.setUsername("lucy");
@@ -75,4 +80,11 @@ public class UserTest {
         int id = 1;
         System.out.println(userService.updatePower(id));
     }
+
+    @Test
+    public void testGetIdByUsername() throws Exception{
+        String username = "孔一言";
+        System.out.println(userService.getIdByUsername(username).getId());
+    }
+
 }

@@ -51,7 +51,8 @@ public class ArticleServiceTest {
         article.setId(5);
         article.setTitle("heheda");
         article.setContent("哦吼");
-        articleService.updateArticle(article);
+        article.setTypes("医治");
+        System.out.println(articleService.updateArticle(article));
     }
 
     @Test
@@ -79,7 +80,7 @@ public class ArticleServiceTest {
     @Test
     public void testGiveArticleLike() throws Exception{
         int articleId = 5;
-        int liked = 20;
+        int liked = 88;
         System.out.println(articleService.giveLike(articleId,liked));
         List articleList = new ArrayList();
         articleList = articleService.getArticle(articleId);

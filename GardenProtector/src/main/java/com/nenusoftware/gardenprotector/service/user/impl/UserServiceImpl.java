@@ -20,6 +20,13 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
+    public List<User> listAllUser() throws Exception{
+        List<User> listUser = Collections.emptyList();
+        listUser = userMapper.listAllUser();
+        return listUser;
+    }
+
+    @Override
     public boolean addUser(User user) throws Exception{
         return userMapper.addUser(user);
     }
@@ -30,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean pwsIsTrue(String username, String password) throws Exception{
+    public List<User> pwsIsTrue(String username, String password) throws Exception{
         return userMapper.pwsIsTrue(username,password);
     }
 
@@ -68,4 +75,11 @@ public class UserServiceImpl implements UserService {
     public boolean updatePower(int id) throws Exception{
         return userMapper.updatePower(id);
     }
+
+    @Override
+    public User getIdByUsername(String username) throws Exception {
+        User id = userMapper.getIdByUsername(username);
+        return id;
+    }
+
 }

@@ -23,6 +23,11 @@
         <result property="power" column="power"/>
     </resultMap>
 
+    <select id="listAllUser" resultMap="user">
+        SELECT `id`, `username`, `power`
+        FROM `t_user`
+    </select>
+
     <insert id="addUser">
         INSERT INTO `t_user`
         (username, password, image, sex, birth, locate, job, introduction, power)
@@ -47,7 +52,7 @@
         WHERE id = #{user.id}
     </update>
 
-    <select id="pwIsTrue" resultMap="user">
+    <select id="pwsIsTrue" resultMap="user">
           SELECT *
           FROM `t_user`
           WHERE username = #{username} AND password = #{password}
@@ -69,5 +74,11 @@
         set power = 1
         where id = #{id}
     </update>
+
+    <select id="getIdByUsername" resultMap="user">
+        SELECT `id`
+        FROM t_user
+        WHERE username = #{username}
+    </select>
 
 </mapper>

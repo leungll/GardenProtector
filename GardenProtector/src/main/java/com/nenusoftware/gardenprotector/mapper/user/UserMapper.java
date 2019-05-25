@@ -23,11 +23,16 @@ public interface UserMapper {
 
     public List<User> listUserArticle(@Param("id") int id) throws Exception;
 
-    public boolean pwsIsTrue(@Param("username") String username, @Param("password") String password) throws Exception;
+    public List<User> pwsIsTrue(@Param("username") String username, @Param("password") String password) throws Exception;
 
     public List<User> selectByName(@Param("username")String username) throws Exception;
 
     public boolean deleteUser(@Param("id") int id) throws Exception;
 
     public boolean updatePower(@Param("id") int id) throws Exception;
+
+    public User getIdByUsername(@Param("username") String username) throws Exception;
+
+    public List<User> listAllUser() throws Exception;
+
 }
