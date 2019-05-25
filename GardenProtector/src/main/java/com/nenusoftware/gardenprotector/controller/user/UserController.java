@@ -1,8 +1,15 @@
 package com.nenusoftware.gardenprotector.controller.user;
 
+import com.nenusoftware.gardenprotector.entity.user.User;
+import com.nenusoftware.gardenprotector.service.user.UserService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @Author: Liangll
@@ -14,5 +21,47 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
+    @Resource
+    UserService userService;
 
+    @RequestMapping("/login")
+    public String login(String username, String password, HttpServletRequest request) throws Exception {
+        if(userService.selectByName(username)){
+            if(userService.pwsIsTrue(username,password).size()!= 0){
+                HttpSession session = request.getSession();
+                session.setAttribute("usernameSession",username);
+                System.out.println("登录成功！");
+            }else {
+                System.out.println("您的密码有误！");
+            }
+        }else{
+            System.out.println("用户名不存在，请去注册！");
+        }
+        return username;
+    }
+
+    @RequestMapping("/register")
+    public String register (String username, String password) throws Exception{
+        if(userService.selectByName(username)){
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
+            if(userService.addUser(user)){
+                System.out.println("注册成功！");
+            }
+        }else{
+            System.out.println("用户名不存在，请去注册！");
+        }
+        return username;
+    }
+
+    @RequestMapping("/listUser")
+    public List<User> listUser(HttpServletRequest request) throws Exception {
+        List<User> userList = null;
+        HttpSession session = request.getSession();
+        String username = String.valueOf(session.getAttribute("usernameSession"));
+        int userId = userService.getIdByUsername(username).getId();
+        userList = userService.listUser(userId);
+        return userList;
+    }
 }
