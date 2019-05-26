@@ -2,11 +2,16 @@ package com.nenusoftware.gardenprotector.controller.adoption;
 
 import com.nenusoftware.gardenprotector.entity.adoption.Adoption;
 import com.nenusoftware.gardenprotector.service.adoption.AdoptionService;
+import com.nenusoftware.gardenprotector.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +19,7 @@ import java.util.List;
  * @author : kongyy
  * @time : 2019/5/23 9:49
  */
-@Controller
+@RestController
 @CrossOrigin
 @RequestMapping("/adoption")
 public class AdoptionController {
@@ -22,12 +27,18 @@ public class AdoptionController {
     @Autowired
     AdoptionService adoptionService;
 
+    @Resource
+    UserService userService;
+
     @RequestMapping(value = "addAdoption")
-    public void addAdoption(String user_idStr, String city, String types, String detail, String note) throws Exception{
+    @ResponseBody
+    public void addAdoption(HttpServletRequest request, String city, String types, String detail, String note) throws Exception{
         Adoption adoption = new Adoption();
+        HttpSession session = request.getSession();
+        String username = String.valueOf(session.getAttribute("usernameSession"));
+        int userId = userService.getIdByUsername(username).getId();
         adoption.setCity(city);
-        Integer user_id = Integer.parseInt(user_idStr);
-        adoption.setUser_id(user_id);
+        adoption.setUser_id(userId);
         adoption.setTypes(types);
         adoption.setDetail(detail);
         adoption.setNote(note);
@@ -52,10 +63,12 @@ public class AdoptionController {
     }
 
     @RequestMapping(value = "listAdoption")
-    public List<Adoption> listAdoption(String userIdStr) throws Exception{
-        Integer user_id = Integer.parseInt(userIdStr);
+    public List<Adoption> listAdoption(HttpServletRequest request) throws Exception{
+        HttpSession session = request.getSession();
+        String username = String.valueOf(session.getAttribute("usernameSession"));
+        int userId = userService.getIdByUsername(username).getId();
         List<Adoption> adoptionList = Collections.emptyList();
-        adoptionList = adoptionService.listAdoption(user_id);
-        return  adoptionList;
+        adoptionList = adoptionService.listAdoption(userId);
+        return adoptionList;
     }
 }

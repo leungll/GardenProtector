@@ -3,15 +3,15 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 80015
+ Source Server Version : 50619
  Source Host           : localhost:3306
  Source Schema         : db_gardenprotector
 
  Target Server Type    : MySQL
- Target Server Version : 80015
+ Target Server Version : 50619
  File Encoding         : 65001
 
- Date: 25/05/2019 14:15:16
+ Date: 26/05/2019 11:58:27
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `t_adoption`  (
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '详情',
   `note` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_adoption
@@ -38,7 +38,15 @@ INSERT INTO `t_adoption` VALUES (1, 3, '上海', '植被', 'bbbbb', 'aaaaaaaa');
 INSERT INTO `t_adoption` VALUES (2, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
 INSERT INTO `t_adoption` VALUES (3, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
 INSERT INTO `t_adoption` VALUES (5, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
-INSERT INTO `t_adoption` VALUES (6, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
+INSERT INTO `t_adoption` VALUES (7, 1, 'beijing', 'jiyang', NULL, 'asdas');
+INSERT INTO `t_adoption` VALUES (8, 1, 'beijing', 'jiyang', 'wqeqw', 'asdas');
+INSERT INTO `t_adoption` VALUES (9, 1, 'beijing', 'jiyang', 'wqeqw', 'asdas');
+INSERT INTO `t_adoption` VALUES (10, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
+INSERT INTO `t_adoption` VALUES (11, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
+INSERT INTO `t_adoption` VALUES (12, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
+INSERT INTO `t_adoption` VALUES (13, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
+INSERT INTO `t_adoption` VALUES (14, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
+INSERT INTO `t_adoption` VALUES (15, 3, '北京', '植被', 'aaaaa', 'aaaaaaaa');
 
 -- ----------------------------
 -- Table structure for t_article
@@ -54,15 +62,20 @@ CREATE TABLE `t_article`  (
   `liked` int(255) DEFAULT NULL,
   `types` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_article
 -- ----------------------------
-INSERT INTO `t_article` VALUES (5, 3, '孔一言', 'heheda', '哦吼', 'Thu May 16 09:31:41 CST 2019', 21, NULL);
+INSERT INTO `t_article` VALUES (5, 3, '孔一言', 'heheda', '哦吼', 'Thu May 16 09:31:41 CST 2019', 89, '医治');
 INSERT INTO `t_article` VALUES (6, 3, '孔一言', 'aaa', '孔一言小仙女', 'Thu May 16 22:00:17 CST 2019', 0, '植被');
 INSERT INTO `t_article` VALUES (7, 3, '孔一言', 'aaa', '孔一言小仙女', 'Thu May 16 22:00:36 CST 2019', 0, '植被啊');
 INSERT INTO `t_article` VALUES (8, 3, '孔一言', 'aaa', '孔一言小仙女', 'Sat May 25 14:02:12 CST 2019', 0, NULL);
+INSERT INTO `t_article` VALUES (9, 3, '孔一言', 'aaa', '孔一言小仙女', 'Sat May 25 23:11:28 CST 2019', 0, NULL);
+INSERT INTO `t_article` VALUES (11, 3, '孔一言', 'aaa', '孔一言小仙女', 'Sat May 25 23:16:06 CST 2019', 0, NULL);
+INSERT INTO `t_article` VALUES (12, 3, '孔一言', 'aaa', '孔一言小仙女', 'Sat May 25 23:29:48 CST 2019', 0, NULL);
+INSERT INTO `t_article` VALUES (13, 3, '孔一言', 'aaa', '孔一言小仙女', 'Sat May 25 23:42:18 CST 2019', 0, NULL);
+INSERT INTO `t_article` VALUES (14, 3, '孔一言', 'aaa', '孔一言小仙女', 'Sat May 25 23:54:05 CST 2019', 0, NULL);
 
 -- ----------------------------
 -- Table structure for t_comment
@@ -77,14 +90,20 @@ CREATE TABLE `t_comment`  (
   `liked` int(11) DEFAULT NULL COMMENT '点赞数',
   `createtime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '评论日期',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_comment
 -- ----------------------------
-INSERT INTO `t_comment` VALUES (1, 5, 3, 'kongyiyan', '真棒', 0, 'Tue May 14 14:38:51 CST 2019');
+INSERT INTO `t_comment` VALUES (1, 5, 3, 'kongyiyan', '真棒', 21, 'Tue May 14 14:38:51 CST 2019');
 INSERT INTO `t_comment` VALUES (2, 5, 3, 'kongyiyan', 'ayouyouyou', 0, 'Tue May 14 14:41:41 CST 2019');
 INSERT INTO `t_comment` VALUES (3, 1, 3, 'kongyiyan', '真棒', 0, 'Wed May 22 15:47:20 CST 2019');
+INSERT INTO `t_comment` VALUES (4, 1, 3, 'kongyiyan', '真棒', 0, 'Sat May 25 23:11:28 CST 2019');
+INSERT INTO `t_comment` VALUES (5, 1, 3, 'kongyiyan', '真棒', 0, 'Sat May 25 23:13:31 CST 2019');
+INSERT INTO `t_comment` VALUES (6, 1, 3, 'kongyiyan', '真棒', 0, 'Sat May 25 23:16:07 CST 2019');
+INSERT INTO `t_comment` VALUES (7, 1, 3, 'kongyiyan', '真棒', 0, 'Sat May 25 23:29:48 CST 2019');
+INSERT INTO `t_comment` VALUES (8, 1, 3, 'kongyiyan', '真棒', 0, 'Sat May 25 23:42:18 CST 2019');
+INSERT INTO `t_comment` VALUES (9, 1, 3, 'kongyiyan', '真棒', 0, 'Sat May 25 23:54:06 CST 2019');
 
 -- ----------------------------
 -- Table structure for t_reply
@@ -99,13 +118,18 @@ CREATE TABLE `t_reply`  (
   `liked` int(255) DEFAULT NULL COMMENT '点赞数',
   `createtime` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '回复时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_reply
 -- ----------------------------
 INSERT INTO `t_reply` VALUES (1, 3, '孔一言', 1, '回复内容测试', 0, '时间测试');
 INSERT INTO `t_reply` VALUES (2, 1, '孔一言', 2, '你的评论真棒', 0, 'Sat May 25 14:04:57 CST 2019');
+INSERT INTO `t_reply` VALUES (3, 1, '孔一言', 2, '你的评论真棒', 0, 'Sat May 25 23:11:28 CST 2019');
+INSERT INTO `t_reply` VALUES (5, 1, '孔一言', 2, '你的评论真棒', 0, 'Sat May 25 23:16:07 CST 2019');
+INSERT INTO `t_reply` VALUES (6, 1, '孔一言', 2, '你的评论真棒', 0, 'Sat May 25 23:29:48 CST 2019');
+INSERT INTO `t_reply` VALUES (7, 1, '孔一言', 2, '你的评论真棒', 0, 'Sat May 25 23:42:18 CST 2019');
+INSERT INTO `t_reply` VALUES (8, 1, '孔一言', 2, '你的评论真棒', 0, 'Sat May 25 23:54:06 CST 2019');
 
 -- ----------------------------
 -- Table structure for t_user
@@ -123,12 +147,17 @@ CREATE TABLE `t_user`  (
   `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '简介',
   `power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '超管',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES (1, '孔一言', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '1');
-INSERT INTO `t_user` VALUES (3, 'lucyaaaaaa', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '0');
+INSERT INTO `t_user` VALUES (1, 'admin', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '1');
+INSERT INTO `t_user` VALUES (5, 'lucy', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '0');
+INSERT INTO `t_user` VALUES (6, 'lucy', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '0');
+INSERT INTO `t_user` VALUES (7, 'lucy', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '0');
+INSERT INTO `t_user` VALUES (8, 'lucy', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '0');
+INSERT INTO `t_user` VALUES (9, 'admin2', NULL, '123', NULL, NULL, NULL, NULL, NULL, '0');
+INSERT INTO `t_user` VALUES (10, 'lucy', 'aaaaaaa', '123', '女', '19991021', 'henan', '软件狗', '我是小仙女', '0');
 
 SET FOREIGN_KEY_CHECKS = 1;

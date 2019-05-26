@@ -35,6 +35,7 @@ public class UserTest {
         user.setIntroduction("我是小仙女");
         user.setJob("软件狗");
         user.setLocate("henan");
+        user.setPower(0);
         userService.addUser(user);
     }
 
@@ -83,7 +84,7 @@ public class UserTest {
 
     @Test
     public void testGetIdByUsername() throws Exception{
-        String username = "孔一言";
+        String username = "admin";
         System.out.println(userService.getIdByUsername(username).getId());
     }
 
