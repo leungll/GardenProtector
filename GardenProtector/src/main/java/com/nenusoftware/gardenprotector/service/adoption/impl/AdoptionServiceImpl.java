@@ -38,4 +38,15 @@ public class AdoptionServiceImpl implements AdoptionService {
         List<Adoption> list = adoptionMapper.listAdoption(user_id);
         return list;
     }
+
+    @Override
+    public List<Adoption> listAllAdoption() throws Exception{
+        List<Adoption> list = adoptionMapper.listAllAdoption();
+        return list;
+    }
+
+    @Override
+    public boolean updateAdoptionStatus(int id) throws Exception{
+        return adoptionMapper.updateAdoptionStatus(id);
+    }
 }

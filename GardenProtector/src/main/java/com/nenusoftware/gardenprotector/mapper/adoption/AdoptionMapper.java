@@ -22,4 +22,8 @@ public interface AdoptionMapper {
     public boolean updateAdoption(@Param("id") int id, @Param("adoption") Adoption adoption) throws Exception;
 
     public List<Adoption> listAdoption(@Param("user_id") int user_id) throws Exception;
+
+    public List<Adoption> listAllAdoption() throws Exception;
+
+    public boolean updateAdoptionStatus(@Param("id") int id) throws Exception;
 }

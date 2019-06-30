@@ -27,6 +27,7 @@ public class AdoptionServiceTest {
         adoption.setTypes("植被");
         adoption.setDetail("aaaaa");
         adoption.setNote("aaaaaaaa");
+        adoption.setStatus("未完成");
         adoptionService.addAdoption(adoption);
     }
 
@@ -50,6 +51,18 @@ public class AdoptionServiceTest {
 
     @Test
     public void listAdoption() throws Exception{
-        System.out.println(adoptionService.listAdoption(3));
+        System.out.println(adoptionService.listAdoption(1));
     }
+
+    @Test
+    public void testListAllAdoption() throws Exception{
+        System.out.println(adoptionService.listAllAdoption());
+    }
+
+    @Test
+    public void testUpdateAdoptionStatus() throws Exception{
+        System.out.println(adoptionService.updateAdoptionStatus(1));
+    }
+
+
 }

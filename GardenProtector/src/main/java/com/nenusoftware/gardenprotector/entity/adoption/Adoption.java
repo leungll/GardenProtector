@@ -18,6 +18,8 @@ public class Adoption {
 
     private String note;
 
+    private String status;
+
     public Integer getId() {
         return id;
     }
@@ -66,15 +68,24 @@ public class Adoption {
         this.note = note;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Adoption{" +
                 "id=" + id +
                 ", user_id=" + user_id +
                 ", city='" + city + '\'' +
-                ", type='" + types + '\'' +
+                ", types='" + types + '\'' +
                 ", detail='" + detail + '\'' +
                 ", note='" + note + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

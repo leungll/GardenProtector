@@ -82,10 +82,10 @@ public class UserTest {
         System.out.println(userService.updatePower(id));
     }
 
-    @Test
-    public void testGetIdByUsername() throws Exception{
-        String username = "admin";
-        System.out.println(userService.getIdByUsername(username).getId());
-    }
+//    @Test
+//    public void testGetIdByUsername() throws Exception{
+//        String username = "admin";
+//        System.out.println(userService.getIdByUsername(username).getId());
+//    }
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * @Description:
  * @Date: 13:37 2019/5/15
  */
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true")
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
@@ -32,6 +32,7 @@ public class CommentController {
     UserService userService;
 
     @RequestMapping("listAllComment")
+    @ResponseBody
     public List<Comment> listAllComment(String articleIdStr){
         int articleId = Integer.parseInt(articleIdStr);
         List<Comment> commentList = null;
@@ -45,15 +46,20 @@ public class CommentController {
 
     @RequestMapping("addComment")
     @ResponseBody
-    public void addComment(String articleIdStr, String authorStr, String contentStr, HttpServletRequest request) throws Exception {
+    public List<Comment> addComment(String articleIdStr, String contentStr, HttpServletRequest request) throws Exception {
         Comment comment = new Comment();
         int articleId = Integer.parseInt(articleIdStr);
+
         HttpSession session = request.getSession();
         String username = String.valueOf(session.getAttribute("usernameSession"));
         int userId = userService.getIdByUsername(username).getId();
+
+//        int userId = 5;
+//        String username = "admin";
+
         comment.setArticle_id(articleId);
         comment.setUser_id(userId);
-        comment.setAuthor(authorStr);
+        comment.setAuthor(username);
         comment.setContent(contentStr);
         comment.setLiked(0);
         Date date = new Date();
@@ -61,14 +67,21 @@ public class CommentController {
         comment.setCreatetime(createTime);
         commentService.addComment(comment);
         System.out.println("添加评论成功！");
+
+        List<Comment> commentList = null;
+        commentList = commentService.listComment(articleId);
+        return commentList;
     }
 
     @RequestMapping("delComment")
-    public void delComment(String commentIdStr, HttpServletRequest request, String userIdFrontStr) throws Exception {
+    @ResponseBody
+    public List<Comment> delComment(String articleIdStr, String commentIdStr, HttpServletRequest request, String userIdFrontStr) throws Exception {
         int userIdFront = Integer.parseInt(userIdFrontStr);
+        int articleId = Integer.parseInt(articleIdStr);
         HttpSession session = request.getSession();
         String username = String.valueOf(session.getAttribute("usernameSession"));
         int userId = userService.getIdByUsername(username).getId();
+
         if(userId == userIdFront){
             int commentId = Integer.parseInt(commentIdStr);
             commentService.delComment(commentId);
@@ -76,28 +89,31 @@ public class CommentController {
         }else{
             System.out.println("您不是这篇评论的作者，无权删除！");
         }
+        List<Comment> commentList = null;
+        commentList = commentService.listComment(articleId);
+        return commentList;
     }
 
-    @RequestMapping("updateComment")
-    public void updateComment(String articleIdStr, String userIdStr, String commentIdStr, String authorStr, String contentStr, String likedStr) throws Exception {
-        int commentId = Integer.parseInt(commentIdStr);
-        int articleId = Integer.parseInt(articleIdStr);
-        int userId = Integer.parseInt(userIdStr);
-        int liked = Integer.parseInt(likedStr);
-        Date date = new Date();
-        String createTime = String.valueOf(date);
-        Comment comment = new Comment();
-        comment.setId(commentId);
-        comment.setArticle_id(articleId);
-        comment.setUser_id(userId);
-        comment.setAuthor(authorStr);
-        comment.setContent(contentStr);
-        comment.setLiked(liked);
-        comment.setCreatetime(createTime);
-        commentService.updateComment(comment);
-        System.out.println("修改评论成功！");
-    }
-
+//    @RequestMapping("updateComment")
+//    @ResponseBody
+//    public void updateComment(String articleIdStr, String userIdStr, String commentIdStr, String authorStr, String contentStr, String likedStr) throws Exception {
+//        int commentId = Integer.parseInt(commentIdStr);
+//        int articleId = Integer.parseInt(articleIdStr);
+//        int userId = Integer.parseInt(userIdStr);
+//        int liked = Integer.parseInt(likedStr);
+//        Date date = new Date();
+//        String createTime = String.valueOf(date);
+//        Comment comment = new Comment();
+//        comment.setId(commentId);
+//        comment.setArticle_id(articleId);
+//        comment.setUser_id(userId);
+//        comment.setAuthor(authorStr);
+//        comment.setContent(contentStr);
+//        comment.setLiked(liked);
+//        comment.setCreatetime(createTime);
+//        commentService.updateComment(comment);
+//        System.out.println("修改评论成功！");
+//    }
 
     @RequestMapping("/getCommentLike")
     @ResponseBody
@@ -109,4 +125,5 @@ public class CommentController {
         commentList = commentService.getCommentLike(commentId);
         return commentList;
     }
+
 }

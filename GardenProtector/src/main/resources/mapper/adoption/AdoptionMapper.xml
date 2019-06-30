@@ -11,17 +11,24 @@
         <result property="types" column="types"/>
         <result property="detail" column="detail"/>
         <result property="note" column="note"/>
+        <result property="status" column="status"/>
     </resultMap>
 
     <insert id="addAdoption">
         INSERT INTO `t_adoption`
-        (user_id, city, types, detail, note)
-        VALUES (#{adoption.user_id}, #{adoption.city}, #{adoption.types}, #{adoption.detail}, #{adoption.note})
+        (user_id, city, types, detail, note, status)
+        VALUES (#{adoption.user_id}, #{adoption.city}, #{adoption.types}, #{adoption.detail}, #{adoption.note} ,#{adoption.status})
     </insert>
 
-    <select id="listAdoption" resultMap="adoption">
+    <select id="listAllAdoption" resultMap="adoption">
           SELECT *
           FROM `t_adoption`
+    </select>
+
+    <select id="listAdoption" resultMap="adoption">
+        SELECT *
+        FROM `t_adoption`
+        WHERE user_id = #{user_id}
     </select>
 
     <update id="updateAdoption">
@@ -35,5 +42,10 @@
         WHERE id = #{id}
     </delete>
 
+    <update id="updateAdoptionStatus" >
+        UPDATE t_adoption
+        SET status = '已完成'
+        WHERE id = #{id}
+    </update>
 
 </mapper>

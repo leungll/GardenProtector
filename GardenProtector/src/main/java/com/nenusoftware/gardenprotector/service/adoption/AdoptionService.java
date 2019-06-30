@@ -17,4 +17,8 @@ public interface AdoptionService {
     public boolean updateAdoption(int id, Adoption adoption) throws Exception;
 
     public List<Adoption> listAdoption(int user_id) throws Exception;
+
+    public List<Adoption> listAllAdoption() throws Exception;
+
+    public boolean updateAdoptionStatus(int id) throws Exception;
 }

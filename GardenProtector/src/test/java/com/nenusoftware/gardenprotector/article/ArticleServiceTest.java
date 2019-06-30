@@ -80,7 +80,7 @@ public class ArticleServiceTest {
     @Test
     public void testGiveArticleLike() throws Exception{
         int articleId = 5;
-        int liked = 88;
+        int liked = 100;
         System.out.println(articleService.giveLike(articleId,liked));
         List articleList = new ArrayList();
         articleList = articleService.getArticle(articleId);

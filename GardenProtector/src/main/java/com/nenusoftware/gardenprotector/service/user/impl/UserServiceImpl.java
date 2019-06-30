@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> listAllUser() throws Exception{
-        List<User> listUser = Collections.emptyList();
-        listUser = userMapper.listAllUser();
-        return listUser;
+        List<User> userList = Collections.emptyList();
+        userList = userMapper.listAllUser();
+        return userList;
     }
 
     @Override
